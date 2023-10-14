@@ -296,3 +296,8 @@
     <!-- End of Page Wrapper -->
             @endsection
 
+@section('script')
+    <!-- Page level custom scripts -->
+    <script  src="{{ asset('asset/sb-admin/js/demo/chart-area-demo.js')}}"></script>
+    <script  src="{{ asset('asset/sb-admin/js/demo/chart-pie-demo.js')}}"></script>
+@endsection

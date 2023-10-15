@@ -263,9 +263,90 @@
                         </div>
                     </div>
 
-                    
 
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Data RI Local WBS</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered dataTable" id="dataTableRIWBS" width="100%"
+                                                cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="1" colspan="1">No</th>
+                                                        <th rowspan="1" colspan="1">ID WBS</th>
+                                                        <th rowspan="1" colspan="1">Impact</th>
+                                                        <th rowspan="1" colspan="1">Probability</th>
+                                                        <th rowspan="1" colspan="1">RI Local</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php $i = 1 @endphp
+                                                    @foreach ($monte_carlo_wbs_average as $w)
+                                                    <tr class="odd">
+                                                        <td class="sorting_1">{{ $i++ }}</td>
+                                                        <td>{{ $w['id_wbs'] }}</td>
+                                                        <td>{{ $w['probability_average'] }}</td>
+                                                        <td>{{ $w['impact_average'] }}</td>
+                                                        <td>{{ $w['risk_index_average'] }}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                         
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Data RI Local RBA</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered dataTable" id="dataTableRIRBA" width="100%"
+                                                cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="1" colspan="1">No</th>
+                                                        <th rowspan="1" colspan="1">ID RBA</th>
+                                                        <th rowspan="1" colspan="1">Impact</th>
+                                                        <th rowspan="1" colspan="1">Probability</th>
+                                                        <th rowspan="1" colspan="1">RI Local</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php $i = 1 @endphp
+                                                    @foreach ($monte_carlo_rba_average as $w)
+                                                    <tr class="odd">
+                                                        <td class="sorting_1">{{ $i++ }}</td>
+                                                        <td>{{ $w['id_rba'] }}</td>
+                                                        <td>{{ $w['probability_average'] }}</td>
+                                                        <td>{{ $w['impact_average'] }}</td>
+                                                        <td>{{ $w['risk_index_average'] }}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                         
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -295,12 +376,21 @@ $(document).ready(function() {
 $(document).ready(function() {
   $('#dataTableRBA').DataTable();
 });
+
 $(document).ready(function() {
   $('#dataTableMontecarloWBS').DataTable();
 });
 
 $(document).ready(function() {
   $('#dataTableMontecarloRBA').DataTable();
+});
+
+$(document).ready(function() {
+  $('#dataTableRIWBS').DataTable();
+});
+
+$(document).ready(function() {
+  $('#dataTableRIRBA').DataTable();
 });
 
 </script>

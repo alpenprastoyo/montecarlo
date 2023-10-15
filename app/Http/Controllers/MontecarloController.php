@@ -69,7 +69,7 @@ class MontecarloController extends Controller
 
         $monte_carlo_wbs = [];
 
-        for($i=0; $i<10000;$i++){
+        for($i=0; $i<100;$i++){
             $wbs_test = [];
             $impact_class = 1;
             $probability_class = 1;
@@ -134,7 +134,7 @@ class MontecarloController extends Controller
 
         $monte_carlo_rba = [];
 
-        for($i=0; $i<10000;$i++){
+        for($i=0; $i<100;$i++){
             $rba_test = [];
             $impact_class = 1;
             $probability_class = 1;
@@ -206,11 +206,11 @@ class MontecarloController extends Controller
             'monte_carlo_rba_average' => $monte_carlo_rba_average,
             'data_wbs' => $wbs_transaction,
             'data_rba' => $rba_transaction
-
         ];
         
         return view('montecarlo.index', $data);
-
     }
+
+    
 
 }

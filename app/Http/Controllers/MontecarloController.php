@@ -128,7 +128,7 @@ class MontecarloController extends Controller
                 "id_wbs" => $id_wbs,
                 "impact_average" => number_format($impact / count($monte_carlo_wbs),3),
                 "probability_average" => number_format($probability / count($monte_carlo_wbs),3),
-                "risk_index_average" => number_format($risk / count($monte_carlo_wbs),3)
+                "risk_index_average" => number_format($impact / count($monte_carlo_wbs),3) * number_format($probability / count($monte_carlo_wbs),3)
             ];
         }
 
@@ -193,7 +193,7 @@ class MontecarloController extends Controller
                 "id_rba" => $id_rba,
                 "impact_average" => number_format($impact / count($monte_carlo_rba),3),
                 "probability_average" => number_format($probability / count($monte_carlo_rba),3),
-                "risk_index_average" => number_format($risk / count($monte_carlo_rba),3)
+                "risk_index_average" => number_format($impact / count($monte_carlo_rba),3) * number_format($probability / count($monte_carlo_rba),3)
             ];
         }
 
@@ -211,6 +211,6 @@ class MontecarloController extends Controller
         return view('montecarlo.index', $data);
     }
 
-    
+
 
 }

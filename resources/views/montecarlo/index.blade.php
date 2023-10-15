@@ -151,18 +151,17 @@
                                                     <tr>
                                                         <td class="tg-0lax" rowspan="3">Nomor Simulasi</td>
                                                         <td class="tg-0lax" rowspan="3">Angka Random</td>
-                                                        <td class="tg-0lax" colspan="{{ 3 * count($data_wbs) }}">wbs</td>
+                                                        <td class="tg-0lax" colspan="{{ 2 * count($data_wbs) }}">wbs</td>
                                                       </tr>
                                                       <tr>
                                                         @foreach ($data_wbs as $w)
-                                                        <td  colspan="3">{{ $w->id_wbs }}</td>
+                                                        <td  colspan="2">{{ $w->id_wbs }}</td>
                                                         @endforeach
                                                       </tr>
                                                       <tr>
                                                         @foreach ($data_wbs as $w)
                                                         <td>Probability</td>
                                                         <td>Impact</td>
-                                                        <td>Risk Index</td>
                                                         @endforeach
                                                       </tr>
                                                 </thead>
@@ -175,7 +174,6 @@
                                                         @foreach ($w['wbs_result'] as $r)
                                                         <td>{{ $r['probability_class'] }}</td>
                                                         <td>{{ $r['impact_class'] }}</td>
-                                                        <td>{{ $r['risk_index'] }}</td>
                                                         @endforeach 
                                                     </tr>
                                                     @endforeach
@@ -186,7 +184,6 @@
                                                         @foreach ($monte_carlo_wbs_average as $w)
                                                         <td>{{ $w['probability_average'] }}</td>
                                                         <td>{{ $w['impact_average'] }}</td>
-                                                        <td>{{ $w['risk_index_average'] }}</td>                                                         
                                                         @endforeach
                                                     </tr>
                                                 </tfoot>
@@ -215,18 +212,17 @@
                                                     <tr>
                                                         <td class="tg-0lax" rowspan="3">Nomor Simulasi</td>
                                                         <td class="tg-0lax" rowspan="3">Angka Random</td>
-                                                        <td class="tg-0lax" colspan="{{ 3 * count($data_rba) }}">rba</td>
+                                                        <td class="tg-0lax" colspan="{{ 2 * count($data_rba) }}">rba</td>
                                                       </tr>
                                                       <tr>
                                                         @foreach ($data_rba as $w)
-                                                        <td  colspan="3">{{ $w->id_rba }}</td>
+                                                        <td  colspan="2">{{ $w->id_rba }}</td>
                                                         @endforeach
                                                       </tr>
                                                       <tr>
                                                         @foreach ($data_rba as $w)
                                                         <td>Probability</td>
                                                         <td>Impact</td>
-                                                        <td>Risk Index</td>
                                                         @endforeach
                                                       </tr>
                                                 </thead>
@@ -239,7 +235,6 @@
                                                         @foreach ($w['rba_result'] as $r)
                                                         <td>{{ $r['probability_class'] }}</td>
                                                         <td>{{ $r['impact_class'] }}</td>
-                                                        <td>{{ $r['risk_index'] }}</td>
                                                         @endforeach 
                                                     </tr>
                                                     @endforeach
@@ -250,7 +245,6 @@
                                                         @foreach ($monte_carlo_rba_average as $w)
                                                         <td>{{ $w['probability_average'] }}</td>
                                                         <td>{{ $w['impact_average'] }}</td>
-                                                        <td>{{ $w['risk_index_average'] }}</td>                                                         
                                                         @endforeach
                                                     </tr>
                                                 </tfoot>

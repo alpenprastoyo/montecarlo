@@ -41,8 +41,8 @@ class MontecarloController extends Controller
             }      
         }
 
-        $rbatransaction = RBATransactionModel::groupBy('id_rba')->get();
-        foreach($rbatransaction as $w){
+        $rba_transaction = RBATransactionModel::groupBy('id_rba')->get();
+        foreach($rba_transaction as $w){
             $impact_kumulative = 0;
             $probability_kumulative = 0;
             for($i = 1; $i <= 5; $i++){
@@ -67,9 +67,146 @@ class MontecarloController extends Controller
             }      
         }
 
+        $monte_carlo_wbs = [];
+
+        for($i=0; $i<10000;$i++){
+            $wbs_test = [];
+            $impact_class = 1;
+            $probability_class = 1;
+            $random_decimal = number_format(rand(0, 100) / 100, 2);
+            foreach($wbs_transaction as $w){
+                $id_wbs = $w['id_wbs'];
+                $result = array_filter($data_wbs, function($item) use ($id_wbs) {
+                    return $item['id_wbs'] == $id_wbs;
+                });
+
+                foreach($result as $r){
+                    if($random_decimal <= $r['impact_kumulative'] ){
+                        $impact_class = $r['impact'];
+                        break;
+                    }
+                }
+
+                foreach($result as $r){
+                    if($random_decimal <= $r['probability_kumulative'] ){
+                        $probability_class = $r['probability'];
+                        break;
+                    }
+                }
+
+                $wbs_test[] = [
+                    'id_wbs' => $id_wbs,
+                    'impact_class' => $impact_class,
+                    'probability_class' => $probability_class,
+                    'risk_index' => $impact_class * $probability_class
+                ]; 
+            }
+            $monte_carlo_wbs[] = [
+                "rand" => $random_decimal,
+                "wbs_result" => $wbs_test,
+                "wbs" => $wbs_transaction
+            ];
+        }
+
+        $monte_carlo_wbs_average = [];
+
+        foreach ($wbs_transaction as $w){
+            $impact = 0;
+            $probability = 0;
+            $risk = 0;
+            $id_wbs =  $w['id_wbs'];
+            foreach($monte_carlo_wbs as $r){
+                $result = array_filter($r['wbs_result'], function($item) use ($id_wbs) {
+                    return $item['id_wbs'] == $id_wbs;
+                });
+                $impact = $impact + array_sum(array_column($result, 'impact_class'));
+                $probability = $probability + array_sum(array_column($result, 'probability_class'));
+                $risk = $risk + array_sum(array_column($result, 'risk_index'));
+            }
+
+            $monte_carlo_wbs_average[] = [
+                "id_wbs" => $id_wbs,
+                "impact_average" => number_format($impact / count($monte_carlo_wbs),3),
+                "probability_average" => number_format($probability / count($monte_carlo_wbs),3),
+                "risk_index_average" => number_format($risk / count($monte_carlo_wbs),3)
+            ];
+        }
+
+        $monte_carlo_rba = [];
+
+        for($i=0; $i<10000;$i++){
+            $rba_test = [];
+            $impact_class = 1;
+            $probability_class = 1;
+            $random_decimal = number_format(rand(0, 100) / 100, 2);
+            foreach($rba_transaction as $w){
+                $id_rba = $w['id_rba'];
+                $result = array_filter($data_rba, function($item) use ($id_rba) {
+                    return $item['id_rba'] == $id_rba;
+                });
+
+                foreach($result as $r){
+                    if($random_decimal <= $r['impact_kumulative'] ){
+                        $impact_class = $r['impact'];
+                        break;
+                    }
+                }
+
+                foreach($result as $r){
+                    if($random_decimal <= $r['probability_kumulative'] ){
+                        $probability_class = $r['probability'];
+                        break;
+                    }
+                }
+
+                $rba_test[] = [
+                    'id_rba' => $id_rba,
+                    'impact_class' => $impact_class,
+                    'probability_class' => $probability_class,
+                    'risk_index' => $impact_class * $probability_class
+                ]; 
+            }
+            $monte_carlo_rba[] = [
+                "rand" => $random_decimal,
+                "rba_result" => $rba_test,
+                "rba" => $rba_transaction,
+            ];
+        }
+
+        $monte_carlo_rba_average = [];
+
+        foreach ($rba_transaction as $w){
+            $impact = 0;
+            $probability = 0;
+            $risk = 0;
+            $id_rba =  $w['id_rba'];
+            foreach($monte_carlo_rba as $r){
+                $result = array_filter($r['rba_result'], function($item) use ($id_rba) {
+                    return $item['id_rba'] == $id_rba;
+                });
+                $impact = $impact + array_sum(array_column($result, 'impact_class'));
+                $probability = $probability + array_sum(array_column($result, 'probability_class'));
+                $risk = $risk + array_sum(array_column($result, 'risk_index'));
+            }
+
+            $monte_carlo_rba_average[] = [
+                "id_rba" => $id_rba,
+                "impact_average" => number_format($impact / count($monte_carlo_rba),3),
+                "probability_average" => number_format($probability / count($monte_carlo_rba),3),
+                "risk_index_average" => number_format($risk / count($monte_carlo_rba),3)
+            ];
+        }
+
         $data = [
             'wbs' => $data_wbs,
-            'rba' => $data_rba
+            'rba' => $data_rba,
+            'monte_carlo_wbs' => $monte_carlo_wbs,
+            'monte_carlo_wbs_average' => $monte_carlo_wbs_average,
+            'monte_carlo_rba' => $monte_carlo_rba,
+            'monte_carlo_rba_average' => $monte_carlo_rba_average,
+            'data_wbs' => $wbs_transaction,
+            'data_rba' => $rba_transaction
+
         ];
         
         return view('montecarlo.index', $data);

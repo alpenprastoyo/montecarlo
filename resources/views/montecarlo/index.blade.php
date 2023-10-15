@@ -61,7 +61,7 @@
                                                     @php $i = 1 @endphp
                                                     @foreach ($wbs as $w)
                                                     <tr class="odd">
-                                                        <td class="sorting_1">{{ $i }}</td>
+                                                        <td class="sorting_1">{{ $i++ }}</td>
                                                         <td>{{ $w['id_wbs'] }}</td>
                                                         <td>{{ $w['probability'] }}</td>
                                                         <td>{{ $w['probability_frequency'] }}</td>
@@ -113,7 +113,7 @@
                                                     @php $i = 1 @endphp
                                                     @foreach ($rba as $w)
                                                     <tr class="odd">
-                                                        <td class="sorting_1">{{ $i }}</td>
+                                                        <td class="sorting_1">{{ $i++ }}</td>
                                                         <td>{{ $w['id_rba'] }}</td>
                                                         <td>{{ $w['probability'] }}</td>
                                                         <td>{{ $w['probability_frequency'] }}</td>
@@ -134,6 +134,136 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Data Montecarlo WBS</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered dataTable" id="dataTableMontecarloWBS" width="100%"
+                                                cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <td class="tg-0lax" rowspan="3">Nomor Simulasi</td>
+                                                        <td class="tg-0lax" rowspan="3">Angka Random</td>
+                                                        <td class="tg-0lax" colspan="{{ 3 * count($data_wbs) }}">wbs</td>
+                                                      </tr>
+                                                      <tr>
+                                                        @foreach ($data_wbs as $w)
+                                                        <td  colspan="3">{{ $w->id_wbs }}</td>
+                                                        @endforeach
+                                                      </tr>
+                                                      <tr>
+                                                        @foreach ($data_wbs as $w)
+                                                        <td>Probability</td>
+                                                        <td>Impact</td>
+                                                        <td>Risk Index</td>
+                                                        @endforeach
+                                                      </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php $i = 1 @endphp
+                                                    @foreach ($monte_carlo_wbs as $w)
+                                                    <tr class="odd">
+                                                        <td class="sorting_1">{{ $i++ }}</td>
+                                                        <td>{{ $w['rand'] }}</td>
+                                                        @foreach ($w['wbs_result'] as $r)
+                                                        <td>{{ $r['probability_class'] }}</td>
+                                                        <td>{{ $r['impact_class'] }}</td>
+                                                        <td>{{ $r['risk_index'] }}</td>
+                                                        @endforeach 
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td  colspan="2">Average</td>
+                                                        @foreach ($monte_carlo_wbs_average as $w)
+                                                        <td>{{ $w['probability_average'] }}</td>
+                                                        <td>{{ $w['impact_average'] }}</td>
+                                                        <td>{{ $w['risk_index_average'] }}</td>                                                         
+                                                        @endforeach
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                         
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Data Montecarlo RBA</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered dataTable" id="dataTableMontecarloRBA" width="100%"
+                                                cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <td class="tg-0lax" rowspan="3">Nomor Simulasi</td>
+                                                        <td class="tg-0lax" rowspan="3">Angka Random</td>
+                                                        <td class="tg-0lax" colspan="{{ 3 * count($data_rba) }}">rba</td>
+                                                      </tr>
+                                                      <tr>
+                                                        @foreach ($data_rba as $w)
+                                                        <td  colspan="3">{{ $w->id_rba }}</td>
+                                                        @endforeach
+                                                      </tr>
+                                                      <tr>
+                                                        @foreach ($data_rba as $w)
+                                                        <td>Probability</td>
+                                                        <td>Impact</td>
+                                                        <td>Risk Index</td>
+                                                        @endforeach
+                                                      </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php $i = 1 @endphp
+                                                    @foreach ($monte_carlo_rba as $w)
+                                                    <tr class="odd">
+                                                        <td class="sorting_1">{{ $i++ }}</td>
+                                                        <td>{{ $w['rand'] }}</td>
+                                                        @foreach ($w['rba_result'] as $r)
+                                                        <td>{{ $r['probability_class'] }}</td>
+                                                        <td>{{ $r['impact_class'] }}</td>
+                                                        <td>{{ $r['risk_index'] }}</td>
+                                                        @endforeach 
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td  colspan="2">Average</td>
+                                                        @foreach ($monte_carlo_rba_average as $w)
+                                                        <td>{{ $w['probability_average'] }}</td>
+                                                        <td>{{ $w['impact_average'] }}</td>
+                                                        <td>{{ $w['risk_index_average'] }}</td>                                                         
+                                                        @endforeach
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                         
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
 
 
 
@@ -164,6 +294,13 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
   $('#dataTableRBA').DataTable();
+});
+$(document).ready(function() {
+  $('#dataTableMontecarloWBS').DataTable();
+});
+
+$(document).ready(function() {
+  $('#dataTableMontecarloRBA').DataTable();
 });
 
 </script>

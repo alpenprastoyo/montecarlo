@@ -70,7 +70,7 @@ class MontecarloController extends Controller
 
         $monte_carlo_wbs = [];
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 3000; $i++) {
             $wbs_test = [];
             $impact_class = 1;
             $probability_class = 1;
@@ -135,7 +135,7 @@ class MontecarloController extends Controller
 
         $monte_carlo_rba = [];
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 3000; $i++) {
             $rba_test = [];
             $impact_class = 1;
             $probability_class = 1;
@@ -219,7 +219,7 @@ class MontecarloController extends Controller
                 return $item['id_wbs'] == $id_wbs;
             });
             foreach ($result as $s) {
-                $s['local_priority'] = $s['risk_index_average'] / $total1;
+                $s['local_priority'] = $s3['idealized'] = number_format($s['risk_index_average'] / $total1, 4);
                 $s['wbs'] = $l1['kode_wbs'] . ' ' . $l1['nama_wbs'];
                 $s['parent'] = $l1->parent_wbs;
                 $local_priority[] = $s;
@@ -242,7 +242,7 @@ class MontecarloController extends Controller
                     return $item['id_wbs'] == $id_wbs;
                 });
                 foreach ($result as $s) {
-                    $s['local_priority'] = $s['risk_index_average'] / $total2;
+                    $s['local_priority'] = $s3['idealized'] = number_format($s['risk_index_average'] / $total2, 4);
                     $s['wbs'] = $l2['kode_wbs'] . ' ' . $l2['nama_wbs'];
                     $s['parent'] = $l2->parent_wbs;
                     $local_priority[] = $s;
@@ -264,7 +264,7 @@ class MontecarloController extends Controller
                         return $item['id_wbs'] == $id_wbs;
                     });
                     foreach ($result as $s) {
-                        $s['local_priority'] = $s['risk_index_average'] / $total3;
+                        $s['local_priority'] = $s3['idealized'] = number_format($s['risk_index_average'] / $total3, 4);
                         $s['wbs'] = $l3['kode_wbs'] . ' ' . $l3['nama_wbs'];
                         $s['parent'] = $l3->parent_wbs;
                         $local_priority[] = $s;
@@ -285,7 +285,7 @@ class MontecarloController extends Controller
         foreach ($result as $s1) {
             $id_wbs = $s1['id_wbs'];
             $max = max(array_column($result, 'local_priority'));
-            $s1['idealized'] = $s1['local_priority'] / $max;
+            $s1['idealized'] =  number_format($s1['local_priority'] / $max, 4) ;
             $idealized[] = $s1;
             $result2 = array_filter($local_priority, function ($item) use ($id_wbs) {
                 return $item['parent'] == $id_wbs;
@@ -294,7 +294,7 @@ class MontecarloController extends Controller
             foreach ($result2 as $s2) {
                 $id_wbs = $s2['id_wbs'];
                 $max = max(array_column($result2, 'local_priority'));
-                $s2['idealized'] = $s2['local_priority'] / $max;
+                $s2['idealized'] = number_format($s2['local_priority'] / $max, 4) ;
                 $idealized[] = $s2;
                 $result3 = array_filter($local_priority, function ($item) use ($id_wbs) {
                     return $item['parent'] == $id_wbs;
@@ -302,7 +302,7 @@ class MontecarloController extends Controller
                 // dd($result);
                 foreach ($result3 as $s3) {
                     $max = max(array_column($result3, 'local_priority'));
-                    $s3['idealized'] = $s3['local_priority'] / $max;
+                    $s3['idealized'] = number_format($s3['local_priority'] / $max, 4) ;
                     $idealized[] = $s3;
                     // $result = array_filter($local_priority, function ($item) use ($parent) {
                     //     return $item['parent'] == $parent;

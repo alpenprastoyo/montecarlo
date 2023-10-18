@@ -292,6 +292,7 @@ class MontecarloController extends Controller
             });
             // dd($result);
             foreach ($result2 as $s2) {
+                $id_wbs = $s2['id_wbs'];
                 $max = max(array_column($result2, 'local_priority'));
                 $s2['idealized'] = $s2['local_priority'] / $max;
                 $idealized[] = $s2;

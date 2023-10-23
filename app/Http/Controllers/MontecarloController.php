@@ -15,6 +15,9 @@ class MontecarloController extends Controller
         $data_wbs = [];
         $data_rba = [];
 
+        $uji_coba = 10000;
+
+        // $wbs = WBSTransactionModel::get();
 
         $wbs_transaction = WBSTransactionModel::groupBy('id_wbs')->get();
         foreach ($wbs_transaction as $w) {
@@ -41,6 +44,8 @@ class MontecarloController extends Controller
                 ];
             }
         }
+
+        // $rba = RBATransactionModel::get();
 
         $rba_transaction = RBATransactionModel::groupBy('id_rba')->get();
         foreach ($rba_transaction as $w) {
@@ -70,7 +75,7 @@ class MontecarloController extends Controller
 
         $monte_carlo_wbs = [];
 
-        for ($i = 0; $i < 3000; $i++) {
+        for ($i = 0; $i < $uji_coba ; $i++) {
             $wbs_test = [];
             $impact_class = 1;
             $probability_class = 1;
@@ -133,9 +138,26 @@ class MontecarloController extends Controller
             ];
         }
 
+        $monte_carlo_wbs_datatable = [];
+        $i = 1;
+        foreach ($monte_carlo_wbs as $w){
+            $data = [];
+            $data[] = $i++;
+            $data[] = $w['rand'];
+            foreach ($w['wbs_result'] as $w_average){
+                $data[] = $w_average['probability_class'];
+                $data[] = $w_average['impact_class'];
+            }
+            $monte_carlo_wbs_datatable[] = $data;
+        }
+
+        $monte_carlo_wbs_datatable = [
+            'data' => $monte_carlo_wbs_datatable,
+        ];
+
         $monte_carlo_rba = [];
 
-        for ($i = 0; $i < 3000; $i++) {
+        for ($i = 0; $i < $uji_coba ; $i++) {
             $rba_test = [];
             $impact_class = 1;
             $probability_class = 1;
@@ -197,6 +219,25 @@ class MontecarloController extends Controller
                 "risk_index_average" => number_format($impact / count($monte_carlo_rba), 3) * number_format($probability / count($monte_carlo_rba), 3)
             ];
         }
+
+        $monte_carlo_rba_datatable = [];
+        $i = 1;
+        foreach ($monte_carlo_rba as $w){
+            $data = [];
+            $data[] = $i++;
+            $data[] = $w['rand'];
+            foreach ($w['rba_result'] as $w_average){
+                $data[] = $w_average['probability_class'];
+                $data[] = $w_average['impact_class'];
+            }
+            $monte_carlo_rba_datatable[] = $data;
+        }
+
+        $monte_carlo_rba_datatable = [
+            'data' => $monte_carlo_rba_datatable,
+        ];
+
+        
 
         // dd($monte_carlo_wbs_average);
 
@@ -311,14 +352,15 @@ class MontecarloController extends Controller
             }
         }
 
-
         $data = [
             'wbs' => $data_wbs,
             'rba' => $data_rba,
             'monte_carlo_wbs' => $monte_carlo_wbs,
             'monte_carlo_wbs_average' => $monte_carlo_wbs_average,
+            'monte_carlo_wbs_datatable' => json_encode($monte_carlo_wbs_datatable),
             'monte_carlo_rba' => $monte_carlo_rba,
             'monte_carlo_rba_average' => $monte_carlo_rba_average,
+            'monte_carlo_rba_datatable' => json_encode($monte_carlo_rba_datatable),
             'local_priority' => $local_priority,
             'idealized' => $idealized,
             'data_wbs' => $wbs_transaction,
@@ -327,6 +369,8 @@ class MontecarloController extends Controller
 
         return view('montecarlo.index', $data);
     }
+
+    
 
     // public function get_
 

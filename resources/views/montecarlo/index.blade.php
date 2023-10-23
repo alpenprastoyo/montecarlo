@@ -33,7 +33,7 @@
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Montecarlo WBS</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data WBS</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -85,7 +85,7 @@
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Montecarlo RBA</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data RBA</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -166,17 +166,6 @@
                                                       </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @php $i = 1 @endphp
-                                                    @foreach ($monte_carlo_wbs as $w)
-                                                    <tr class="odd">
-                                                        <td class="sorting_1">{{ $i++ }}</td>
-                                                        <td>{{ $w['rand'] }}</td>
-                                                        @foreach ($w['wbs_result'] as $r)
-                                                        <td>{{ $r['probability_class'] }}</td>
-                                                        <td>{{ $r['impact_class'] }}</td>
-                                                        @endforeach 
-                                                    </tr>
-                                                    @endforeach
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
@@ -227,17 +216,6 @@
                                                       </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @php $i = 1 @endphp
-                                                    @foreach ($monte_carlo_rba as $w)
-                                                    <tr class="odd">
-                                                        <td class="sorting_1">{{ $i++ }}</td>
-                                                        <td>{{ $w['rand'] }}</td>
-                                                        @foreach ($w['rba_result'] as $r)
-                                                        <td>{{ $r['probability_class'] }}</td>
-                                                        <td>{{ $r['impact_class'] }}</td>
-                                                        @endforeach 
-                                                    </tr>
-                                                    @endforeach
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
@@ -454,6 +432,9 @@
 <script>
 
     // Call the dataTables jQuery plugin
+
+
+
 $(document).ready(function() {
   $('#dataTableWBS').DataTable();
 });
@@ -462,11 +443,17 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $('#dataTableMontecarloWBS').DataTable();
+    var table_data_montecarlo_wbs = JSON.parse('{!! $monte_carlo_wbs_datatable !!}');
+  $('#dataTableMontecarloWBS').DataTable({
+    "data": table_data_montecarlo_wbs.data,
+  });
 });
 
 $(document).ready(function() {
-  $('#dataTableMontecarloRBA').DataTable();
+    var table_data_montecarlo_rba = JSON.parse('{!! $monte_carlo_rba_datatable !!}');
+    $('#dataTableMontecarloRBA').DataTable({
+    "data": table_data_montecarlo_rba.data,
+  });
 });
 
 $(document).ready(function() {

@@ -15,7 +15,7 @@ class MontecarloController extends Controller
         $data_wbs = [];
         $data_rba = [];
 
-        $uji_coba = 10000;
+        $uji_coba = 3000;
 
         // $wbs = WBSTransactionModel::get();
 

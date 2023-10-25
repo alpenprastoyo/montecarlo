@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RBATransactionModel;
+use App\Models\RBAWBSModel;
 use App\Models\WBSModel;
 use App\Models\WBSTransactionModel;
 use Illuminate\Http\Request;
@@ -352,6 +353,32 @@ class MontecarloController extends Controller
             }
         }
 
+        //risk index
+        $risk_index = [];
+
+        foreach ($idealized as $s){
+            $rba = RBAWBSModel::where('id_wbs', $s['id_wbs'])->get();
+
+            if(count($rba) == 0){
+                $risk_index[] = $s;
+            }
+            
+            foreach ($rba as $r){
+                $id_rba = $r->id_rba;
+                $result = array_filter($monte_carlo_rba_average, function ($item) use ($id_rba) {
+                    return $item['id_rba'] == $id_rba;
+                });
+                foreach ($result as $t){
+                    $s['id_rba'] = $r->id_rba;
+                    $s['name_rba'] = $r->rba->nama_rba;
+                    $s['ri_local'] = $t['risk_index_average'];
+                    $s['risk_index'] = $t['risk_index_average'] * $s['idealized'];
+                    $risk_index[] = $s;
+                }
+            }
+        }
+
+
         $data = [
             'wbs' => $data_wbs,
             'rba' => $data_rba,
@@ -363,6 +390,7 @@ class MontecarloController extends Controller
             'monte_carlo_rba_datatable' => json_encode($monte_carlo_rba_datatable),
             'local_priority' => $local_priority,
             'idealized' => $idealized,
+            'risk_index' => $risk_index,
             'data_wbs' => $wbs_transaction,
             'data_rba' => $rba_transaction
         ];

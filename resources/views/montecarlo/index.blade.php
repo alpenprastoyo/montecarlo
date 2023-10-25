@@ -410,6 +410,50 @@
                         </div>
                     </div>
 
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Risk Index</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered dataTable" id="dataTableRIRBA" width="100%"
+                                                cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                style="width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="1" colspan="1">No</th>
+                                                        <th rowspan="1" colspan="1">Pekerjaan</th>
+                                                        <th rowspan="1" colspan="1">Resiko</th>
+                                                        <th rowspan="1" colspan="1">RI WBS Idealized</th>
+                                                        <th rowspan="1" colspan="1">RI Local</th>
+                                                        <th rowspan="1" colspan="1">Risk Index</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php $i = 1 @endphp
+                                                    @foreach ($risk_index as $w)
+                                                    <tr class="odd">
+                                                        <td class="sorting_1">{{ $i++ }}</td>
+                                                        <td>{{ $w['wbs'] }}</td>
+                                                        <td>{{ !empty($w['id_rba']) ? $w['id_rba'] .'. '.  $w['name_rba'] : '' }}</td>
+                                                        <td>{{ !empty($w['idealized']) ? $w['idealized'] : ''  }}</td>
+                                                        <td>{{ !empty($w['ri_local']) ? $w['ri_local'] : ''  }}</td>
+                                                        <td>{{ !empty($w['risk_index']) ? $w['risk_index'] : ''  }}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                         
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <!-- /.container-fluid -->
 

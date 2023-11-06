@@ -20,6 +20,10 @@ class RBAModel extends Model
         return $this->hasMany(RBAWBSModel::class,'id_rba','id');
     }
 
+    public function transactionRba(){
+      return $this->hasMany(RBATransactionModel::class,'id_rba','id');
+    }
+
 
 
 }

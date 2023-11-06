@@ -21,8 +21,8 @@ class WBSModel extends Model
     ];
 
 
-    public function transaction_wbs(){
-        return $this->hasOne(WBSTransactionModel::class,'id_rba');
+    public function transactionWbs(){
+        return $this->hasMany(WBSTransactionModel::class,'id_wbs');
     }
 
     public function wbs_rba(){

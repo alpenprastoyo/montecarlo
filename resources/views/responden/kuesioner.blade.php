@@ -64,22 +64,41 @@
                                                             </span>
                                                             <span class="text">Akses Formulir Kuesioner WBS</span>
                                                         </a>
-
-                                                        <a href="#" class="btn btn-primary btn-icon-split btn-sm"
-                                                        data-toggle="modal"
-                                                        data-target="#KuesionerModalRBA_{{ $section->id }}">
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        @if ($section->wbs[0]->transactionWbs->where('id_user',auth()->user()->id)->count() > 0)
+                                                            <button type="button" class="btn btn-success">Sudah
+                                                                Mengisi</button>
+                                                        @else
+                                                            <button type="button" class="btn btn-warning">Belum
+                                                                Mengisi</button>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            <tr>
+                                                <td>{{ $i++ }}</td>
+                                                <td>Kuesioner RBA</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-primary btn-icon-split btn-sm"
+                                                        data-toggle="modal" data-target="#KuesionerModalRBA">
                                                         <span class="icon text-white-50">
                                                             <i class="fas fa-pen"></i>
                                                         </span>
                                                         <span class="text">Akses Formulir Kuesioner RBA</span>
                                                     </a>
-                                                    </td>
-                                                    <td>
-                                                        <i class="btn btn-sm btn-warning" title="Hapus Data Responden"><i
-                                                                class="fa-solid fa-trash"></i></a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                                </td>
+                                                <td>
+                                                    @if ($rba[0]->transactionRba->where('id_user',auth()->user()->id)->count() > 0)
+                                                        <button type="button" class="btn btn-success">Sudah
+                                                            Mengisi</button>
+                                                    @else
+                                                        <button type="button" class="btn btn-warning">Belum
+                                                            Mengisi</button>
+                                                    @endif
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -106,7 +125,7 @@
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <form action="{{ route('responden.kuesioner.add.wbs') }}" method="POST" enctype='multipart/form-data'>
                 @csrf
-                <input type="hidden" name="id" value="{{ $section->id }}"/>
+                <input type="hidden" name="id" value="{{ $section->id }}" />
                 <div class="modal-dialog modal-xl" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -116,7 +135,18 @@
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <div class="modal-body">WBS Impact
+                        <div class="modal-body">
+                            <div class="alert alert-success" role="alert">
+                                <h4 class="alert-heading">Keterangan</h4>
+                                <p>1 : Sangat Tidak Setuju</p>
+                                <p>2 : Tidak Setuju</p>
+                                <p>3 : Netral</p>
+                                <p>4 : Setuju</p>
+                                <p>5 : Sangat Setuju</p>
+
+                                <hr>
+                                <p class="mb-0">Silahkan Mengisi.</p>
+                              </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -130,7 +160,7 @@
                                     <tbody>
                                         @php $i = 1; @endphp
                                         @php $x = 1; @endphp
-                                        @foreach ($section->wbs_all as $wbs)
+                                        @foreach ($section->wbs as $wbs)
                                             <tr>
                                                 <td>{{ $i }}</td>
                                                 <td style="width:50%"><b>WBS {{ $wbs->nama_wbs }}</b></td>
@@ -233,137 +263,136 @@
                 </div>
             </form>
         </div>
+    @endforeach
 
-        <div class="modal fade" id="KuesionerModalRBA_{{ $section->id }}" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <form action="{{ route('responden.kuesioner.add.rba') }}" method="POST" enctype='multipart/form-data'>
-                @csrf
-                <input type="hidden" name="id" value="{{ $section->id }}"/>
-                <div class="modal-dialog modal-xl" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Isi Kuisioner Section
-                                {{ $section->nama_section }}</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">RBA
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+    <div class="modal fade" id="KuesionerModalRBA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <form action="{{ route('responden.kuesioner.add.rba') }}" method="POST" enctype='multipart/form-data'>
+            @csrf
+            <input type="hidden" name="id" value="{{ $section->id }}" />
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Isi Kuisioner Section
+                            {{ $section->nama_section }}</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">RBA
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Pertanyaan</th>
+                                        <th>Nilai Impact</th>
+                                        <th>Nilai Probability</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php $x = 1; @endphp
+                                    @foreach ($rba as $r)
                                         <tr>
-                                            <th>No.</th>
-                                            <th>Pertanyaan</th>
-                                            <th>Nilai Impact</th>
-                                            <th>Nilai Probability</th>
+                                            <td>{{ $x }}</td>
+                                            <td style="width:50%">RBA {{ $r->nama_rba }}</td>
+                                            <td>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban_rba_impact[{{ $x - 1 }}]"
+                                                        id="jawaban{{ $r->id }}" value="1|{{ $r->id }}">
+                                                    <label class="form-check-label"
+                                                        for="jawaban_1_{{ $r->id }}">1</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban_rba_impact[{{ $x - 1 }}]"
+                                                        id="jawaban_2_{{ $r->id }}"
+                                                        value="2|{{ $r->id }}">
+                                                    <label class="form-check-label"
+                                                        for="jawaban_2_{{ $r->id }}">2</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban_rba_impact[{{ $x - 1 }}]"
+                                                        id="jawaban_3_{{ $r->id }}"
+                                                        value="3|{{ $r->id }}">
+                                                    <label class="form-check-label"
+                                                        for="jawaban_3_{{ $r->id }}">3</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban_rba_impact[{{ $x - 1 }}]"
+                                                        id="jawaban_4_{{ $r->id }}"
+                                                        value="4|{{ $r->id }}">
+                                                    <label class="form-check-label"
+                                                        for="jawaban_4_{{ $r->id }}">4</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban_rba_impact[{{ $x - 1 }}]"
+                                                        id="jawaban_5_{{ $r->id }}"
+                                                        value="5|{{ $r->id }}">
+                                                    <label class="form-check-label"
+                                                        for="jawaban_5_{{ $r->id }}">5</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban_rba_probability[{{ $x - 1 }}]"
+                                                        id="jawaban_1_{{ $r->id }}"
+                                                        value="1|{{ $r->id }}">
+                                                    <label class="form-check-label"
+                                                        for="jawaban_1_{{ $r->id }}">1</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban_rba_probability[{{ $x - 1 }}]"
+                                                        id="jawaban_2_{{ $r->id }}"
+                                                        value="2|{{ $r->id }}">
+                                                    <label class="form-check-label"
+                                                        for="jawaban_2_{{ $r->id }}">2</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban_rba_probability[{{ $x - 1 }}]"
+                                                        id="jawaban_3_{{ $r->id }}"
+                                                        value="3|{{ $r->id }}">
+                                                    <label class="form-check-label"
+                                                        for="jawaban_3_{{ $r->id }}">3</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban_rba_probability[{{ $x - 1 }}]"
+                                                        id="jawaban_4_{{ $r->id }}"
+                                                        value="4|{{ $r->id }}">
+                                                    <label class="form-check-label"
+                                                        for="jawaban_4_{{ $r->id }}">4</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="jawaban_rba_probability[{{ $x - 1 }}]"
+                                                        id="jawaban_5_{{ $r->id }}"
+                                                        value="5|{{ $r->id }}">
+                                                    <label class="form-check-label"
+                                                        for="jawaban_5_{{ $r->id }}">5</label>
+                                                </div>
+                                                @php $x++; @endphp
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php $x = 1; @endphp
-                                            @foreach ($section->get_rba($section->id) as $r)
-                                                <tr>
-                                                    <td>{{ $x }}</td>
-                                                    <td style="width:50%">RBA {{ $r->nama_rba }}</td>
-                                                    <td>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="jawaban_rba_impact[{{ $x - 1 }}]"
-                                                                id="jawaban{{ $r->id }}"
-                                                                value="1|{{ $r->id }}">
-                                                            <label class="form-check-label"
-                                                                for="jawaban_1_{{ $r->id }}">1</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="jawaban_rba_impact[{{ $x - 1 }}]"
-                                                                id="jawaban_2_{{ $r->id }}"
-                                                                value="2|{{ $r->id }}">
-                                                            <label class="form-check-label"
-                                                                for="jawaban_2_{{ $r->id }}">2</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="jawaban_rba_impact[{{ $x - 1 }}]"
-                                                                id="jawaban_3_{{ $r->id }}"
-                                                                value="3|{{ $r->id }}">
-                                                            <label class="form-check-label"
-                                                                for="jawaban_3_{{ $r->id }}">3</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="jawaban_rba_impact[{{ $x - 1 }}]"
-                                                                id="jawaban_4_{{ $r->id }}"
-                                                                value="4|{{ $r->id }}">
-                                                            <label class="form-check-label"
-                                                                for="jawaban_4_{{ $r->id }}">4</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="jawaban_rba_impact[{{ $x - 1 }}]"
-                                                                id="jawaban_5_{{ $r->id }}"
-                                                                value="5|{{ $r->id }}">
-                                                            <label class="form-check-label"
-                                                                for="jawaban_5_{{ $r->id }}">5</label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="jawaban_rba_probability[{{ $x - 1 }}]"
-                                                                id="jawaban_1_{{ $r->id }}"
-                                                                value="1|{{ $r->id }}">
-                                                            <label class="form-check-label"
-                                                                for="jawaban_1_{{ $r->id }}">1</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="jawaban_rba_probability[{{ $x - 1 }}]"
-                                                                id="jawaban_2_{{ $r->id }}"
-                                                                value="2|{{ $r->id }}">
-                                                            <label class="form-check-label"
-                                                                for="jawaban_2_{{ $r->id }}">2</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="jawaban_rba_probability[{{ $x - 1 }}]"
-                                                                id="jawaban_3_{{ $r->id }}"
-                                                                value="3|{{ $r->id }}">
-                                                            <label class="form-check-label"
-                                                                for="jawaban_3_{{ $r->id }}">3</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="jawaban_rba_probability[{{ $x - 1 }}]"
-                                                                id="jawaban_4_{{ $r->id }}"
-                                                                value="4|{{ $r->id }}">
-                                                            <label class="form-check-label"
-                                                                for="jawaban_4_{{ $r->id }}">4</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="jawaban_rba_probability[{{ $x - 1 }}]"
-                                                                id="jawaban_5_{{ $r->id }}"
-                                                                value="5|{{ $r->id }}">
-                                                            <label class="form-check-label"
-                                                                for="jawaban_5_{{ $r->id }}">5</label>
-                                                        </div>
-                                                        @php $x++; @endphp
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" type="submit">Simpan</button>
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Simpan</button>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
+                    </div>
                 </div>
-            </form>
-        </div>
-    @endforeach
+            </div>
+        </form>
+    </div>
 @endsection

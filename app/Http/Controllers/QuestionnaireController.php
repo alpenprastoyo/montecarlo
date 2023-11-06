@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RBAModel;
 use App\Models\RBATransactionModel;
 use App\Models\SectionModel;
 use App\Models\WBSTransactionModel;
@@ -18,19 +19,17 @@ class QuestionnaireController extends Controller
 
     public function index()
     {
-        $section = SectionModel::get();
-        // foreach ($section as $s) {
-        //     foreach ($s->wbs_all as $w) {
-        //         foreach ($w->wbs_rba as $r) {
-        //             dd($r->rba);
-        //         }
-        //     }
-        // }
 
+        $id_project = 1;
+
+        $section = SectionModel::where('id_project',$id_project)->get();
+        $rba = RBAModel::get();
         
         $data = [
-            'sections' => $section
+            'sections' => $section,
+            'rba' => $rba
         ];
+        
         return view('responden.kuesioner', $data);
     }
 
@@ -47,7 +46,10 @@ class QuestionnaireController extends Controller
                 'risk_index' => explode('|',$request->jawaban_wbs_probability[$i])[0] * explode('|',$request->jawaban_wbs_impact[$i])[0],
             ];
 
-            WBSTransactionModel::create($data);
+            WBSTransactionModel::updateOrCreate(
+                ['id_user' => Auth::user()->id, 'id_wbs' => explode('|',$request->jawaban_wbs_impact[$i])[1]],
+                $data
+            );
         }
 
         return redirect()->route('responden.kuesioner.index');
@@ -67,7 +69,10 @@ class QuestionnaireController extends Controller
                 'risk_index' => explode('|',$request->jawaban_rba_probability[$i])[0] * explode('|',$request->jawaban_rba_impact[$i])[0],
             ];
 
-            RBATransactionModel::create($data);
+            RBATransactionModel::updateOrCreate(
+                ['id_user' => Auth::user()->id, 'id_rba' => explode('|',$request->jawaban_rba_impact[$i])[1]],
+                $data
+            );
         }
 
         return redirect()->route('responden.kuesioner.index');

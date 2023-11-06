@@ -20,7 +20,7 @@ class SectionModel extends Model
       'nama_section'
     ];
 
-    public function wbs_all()
+    public function wbs()
     { 
         return $this->hasMany(WBSModel::class, 'id_section', 'id');
     }

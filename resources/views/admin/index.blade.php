@@ -4,7 +4,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        @include('layouts/sidebar-user')
+        @include('layouts/sidebar-admin')
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -29,7 +29,9 @@
                         </ol>
                     </nav>
 
+
                     <div class="row">
+
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
@@ -63,6 +65,7 @@
                                             <i class="fas fa-triangle-exclamation fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
+                                    <a href="{{route('montecarlo.index')}}"><button type="button" class="btn btn-primary">Lakukan Monte Carlo</button></a>
                                 </div>
                             </div>
                         </div>

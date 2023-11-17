@@ -13,7 +13,10 @@ class RBAWBSModel extends Model
     
     protected $fillable = [
       'id',
-      'nama_rba',
+      'id_wbs',
+      'id_rba',
+      'kalimat',
+      'risk_index'
     ];
 
     public function rba(){

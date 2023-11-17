@@ -58,7 +58,7 @@
                                         <hr>
                                     </form>
                                     <div class="text-center">
-                                        <a class="small" href="../user/register.php">Belum Punya Akun? Buat Akun!</a>
+                                        <a class="small" href="{{ route('register') }}">Belum Punya Akun? Buat Akun!</a>
                                     </div>
                                 </div>
                                 <footer class="sticky-footer bg-white">

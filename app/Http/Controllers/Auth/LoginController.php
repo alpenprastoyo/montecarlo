@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -49,6 +49,7 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+
      
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
@@ -64,5 +65,17 @@ class LoginController extends Controller
                 ->with('error','Email-Address And Password Are Wrong.');
         }
           
+    }
+
+    protected function redirectTo()
+    {
+        dd('dasf');
+        if (auth()->user()->role == 'admin') {
+            return route('admin.index');
+        } else if (auth()->user()->role == 'responden') {
+            return route('responden.index');
+        } else {
+            return route('login');
+        }
     }
 }

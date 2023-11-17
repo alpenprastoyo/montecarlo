@@ -38,8 +38,8 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Pengaturan Akun:</h6>
-            <a class="collapse-item" href="{{ route('responden.data_diri') }}">Data Diri</a>
-            <a class="collapse-item" href="{{ route('responden.password') }}">Ubah Password</a>
+            <a class="collapse-item" href="{{ route('responden.user.index') }}">Data Diri</a>
+            {{-- <a class="collapse-item" href="{{ route('responden.password') }}">Ubah Password</a> --}}
         </div>
     </div>
 </li>
@@ -76,7 +76,7 @@
 
 <!-- Nav Item - Charts -->
 <li class="nav-item">
-    <a class="nav-link" href="charts.html">
+    <a class="nav-link" href="{{ route('responden.risk.index')}}">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Risk Index</span></a>
 </li>

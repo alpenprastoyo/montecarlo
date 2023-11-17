@@ -68,6 +68,26 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => 'responden',
+            'jenis_kelamin' => $data['jenis_kelamin'],
+            'usia' => $data['usia'],
+            'jenis_perusahaan' => $data['jenis_perusahaan'],
+            'jabatan' => $data['jabatan'],
+            'pengalaman_kerja' => $data['pengalaman_kerja'],
+            'pendidikan_terakhir' => $data['pendidikan_terakhir'],
+
         ]);
+    }
+
+    protected function redirectTo()
+    {
+
+        if (auth()->user()->role == 'admin') {
+            return route('admin.index');
+        } else if (auth()->user()->role == 'responden') {
+            return route('responden.index');
+        } else {
+            return route('login');
+        }
     }
 }

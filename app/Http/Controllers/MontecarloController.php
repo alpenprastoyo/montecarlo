@@ -374,8 +374,16 @@ class MontecarloController extends Controller
                     $s['ri_local'] = $t['risk_index_average'];
                     $s['risk_index'] = $t['risk_index_average'] * $s['idealized'];
                     $risk_index[] = $s;
+
+                    $data = [
+                        'risk_index' => $s['risk_index']
+                    ];
+
+                    RBAWBSModel::where('id_rba',$s['id_rba'])->where('id_wbs',$s['id_wbs'])->update($data);
                 }
             }
+
+            
         }
 
 

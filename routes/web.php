@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MontecarloController;
@@ -35,13 +36,43 @@ Route::get('/montecarlo', [App\Http\Controllers\MontecarloController::class, 'in
 Route::middleware(['auth', 'user-access:responden'])->name('responden.')->prefix('responden')->group(function () {
   
     Route::get('/', [RespondenController::class, 'index'])->name('index');
-    Route::get('/data-diri', [RespondenController::class, 'data_diri'])->name('data_diri');
-    Route::get('/password', [RespondenController::class, 'password'])->name('password');
+    
     Route::name('kuesioner.')->prefix('kuesioner')->group(function () {
         Route::get('/', [QuestionnaireController::class, 'index'])->name('index');
         Route::post('/add/wbs', [QuestionnaireController::class, 'add_wbs'])->name('add.wbs');
         Route::post('/add/rba', [QuestionnaireController::class, 'add_rba'])->name('add.rba');
     });
+
+    Route::name('user.')->prefix('user')->group(function () {
+        Route::get('/', [RespondenController::class, 'user'])->name('index');
+        Route::post('/update', [RespondenController::class, 'updateUser'])->name('update');
+        Route::post('/update_password', [RespondenController::class, 'updateUserPassword'])->name('update.password');
+
+
+    });  
+
+    Route::get('/risk_index', [RespondenController::class, 'riskIndex'])->name('risk.index');
+
+
+});
+
+Route::middleware(['auth', 'user-access:admin'])->name('admin.')->prefix('admin')->group(function () {
+  
+    Route::get('/', [AdminController::class, 'index'])->name('index');
+    
+    Route::name('kuesioner.')->prefix('kuesioner')->group(function () {
+        Route::get('/', [QuestionnaireController::class, 'index'])->name('index');
+        Route::post('/add/wbs', [QuestionnaireController::class, 'add_wbs'])->name('add.wbs');
+        Route::post('/add/rba', [QuestionnaireController::class, 'add_rba'])->name('add.rba');
+    });
+
+    Route::name('responden.')->prefix('responden')->group(function () {
+        Route::get('/', [AdminController::class, 'respondenList'])->name('index');
+        Route::post('/graph', [AdminController::class, 'respondenGraph'])->name('graph');
+    });
+
+    Route::get('/risk_index', [RespondenController::class, 'riskIndex'])->name('risk.index');
+
 
 });
   
@@ -51,10 +82,10 @@ All Admin Routes List
 --------------------------------------------
 --------------------------------------------*/
 
-Route::middleware(['auth', 'user-access:admin'])->name('admin.')->prefix('admin')->group(function () {
+// Route::middleware(['auth', 'user-access:admin'])->name('admin.')->prefix('admin')->group(function () {
   
-    Route::get('/', [AdminController::class, 'index'])->name('index');
-});
+//     Route::get('/', [AdminController::class, 'index'])->name('index');
+// });
 
 
   

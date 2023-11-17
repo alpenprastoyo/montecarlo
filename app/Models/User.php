@@ -27,6 +27,8 @@ class User extends Authenticatable
         'jenis_perusahaan',
         'jabatan',
         'pengalaman_kerja',
+        'pendidikan_terakhir',
+
     ];
 
     /**

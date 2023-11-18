@@ -39,7 +39,8 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Total Responden</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $responden->count() }}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $responden->count() }}
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user-group fa-2x text-gray-300"></i>
@@ -57,7 +58,9 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                 Nilai <em>Risk Index</em> Tertinggi</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $wbsrba->risk_index }}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                {{ $highetsWbsRba->risk_index }}
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-triangle-exclamation fa-2x text-gray-300"></i>
@@ -78,7 +81,8 @@
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h7 mb-0 mr-3 font-weight-bold text-gray-800 lh-base">{{ $wbsrba->kalimat }}</div>
+                                                    <div class="h7 mb-0 mr-3 font-weight-bold text-gray-800 lh-base">
+                                                        {{ $highetsWbsRba->kalimat }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -94,7 +98,7 @@
                     <div class="row">
 
                         <!-- Grafik Risk Index -->
-                        <div class="col-xl-12 col-lg-5">
+                        <div class="col-xl-12 col-lg-12">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3">
@@ -102,11 +106,10 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-pie pt-4">
-                                        <canvas id="RiskChart"></canvas>
-                                    </div>
+                                    <canvas id="myChart" height="6000"></canvas>
                                     <hr>
-                                    Persebaran data <em>Risk Index</em> untuk tiap WBS dan RBA ditampilkan pada grafik di atas.
+                                    Persebaran data <em>Risk Index</em> untuk tiap WBS dan RBA ditampilkan pada grafik di
+                                    atas.
 
                                 </div>
                             </div>
@@ -126,10 +129,41 @@
 
 
     <!-- End of Page Wrapper -->
-            @endsection
+@endsection
 
 @section('script')
     <!-- Page level custom scripts -->
-    <script  src="{{ asset('asset/sb-admin/js/demo/chart-area-demo.js')}}"></script>
-    <script  src="{{ asset('asset/sb-admin/js/demo/chart-pie-demo.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                options: {
+                    indexAxis: 'y',
+                    responsive: 'true',
+                    maintainAspectRatio: 'true',
+                },
+                data: {
+                    labels: {!! $label !!},
+                    datasets: [{
+                        label: 'My Dataset',
+                        data: {!! $data !!},
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                        ],
+                        borderWidth: 1,
+                    }]
+                }
+            });
+        });
+    </script>
 @endsection

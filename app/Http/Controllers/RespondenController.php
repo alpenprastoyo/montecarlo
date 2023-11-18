@@ -10,13 +10,72 @@ use Illuminate\Support\Facades\Auth;
 
 class RespondenController extends Controller
 {
+
+    public function getEveryNthWord($sentence, $n) {
+        // Remove extra spaces and trim the sentence
+        $sentence = trim(preg_replace('/\s+/', ' ', $sentence));
+    
+        // Split the sentence into an array of words
+        $words = explode(' ', $sentence);
+    
+        // Initialize an array to store every nth word
+        $result = [];
+
+        $i = 0;
+        $j = 0;
+
+        $sentence = [];
+        foreach ($words as $word) {
+            if($j < floor(count($words)/$n)){
+                if($i == $n){
+                    $i = 0;
+                    $sentence[] = $word;
+                    $result[] = implode(' ',$sentence);
+                    $sentence = [];
+                    $j++;
+                }else{
+                    $sentence[] = $word;
+                    $i++;
+                }
+            }else{
+                if($i + 2 < count($words) % $n){
+                    $sentence[] = $word;
+                    $i++;
+                }else{
+                    $sentence[] = $word;
+                    $result[] = implode(' ',$sentence);
+                }
+            }
+            
+        }
+    
+        return $result;
+    }
+
+
     public function index()
     {
-        $wbsrba = RBAWBSModel::orderByDesc('risk_index')->first();
+        $wbsrba = RBAWBSModel::orderByDesc('risk_index');
+
+        // dd($wbsrba->get()->pluck('kalimat')->toArray());
+
+        $getwbsrba = $wbsrba->get();
+
+        $highestWbsRba = $wbsrba->first();
+
+        $labels = [];
+        foreach ($getwbsrba->pluck('kalimat')->toArray() as $s){
+            $labels[] = $this->getEveryNthWord($s, 7);
+        }
+
+        $label = $labels;
+
         $responden = RBATransactionModel::groupBy('id_user');
         $data = [
-            'wbsrba' => $wbsrba,
-            'responden' => $responden
+            'highetsWbsRba' => $highestWbsRba,
+            'responden' => $responden,
+            'label' => json_encode($label),
+            'data' => json_encode($getwbsrba->pluck('risk_index')->toArray())
         ];
         return view('responden.index',$data);
     } 

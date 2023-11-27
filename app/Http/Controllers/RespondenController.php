@@ -52,12 +52,27 @@ class RespondenController extends Controller
         return $result;
     }
 
+    function getFirstNWords($inputString, $n) {
+        // Split the input string into an array of words
+        $words = explode(' ', $inputString);
+    
+        // Take the first n words from the array
+        $result = array_slice($words, 0, $n);
+    
+        // Join the selected words back into a string
+        $resultString = implode(' ', $result);
+
+        if(count($words) > $n){
+            $resultString = $resultString.'....';
+        }
+    
+        return $resultString;
+    }
+
 
     public function index()
     {
         $wbsrba = RBAWBSModel::orderByDesc('risk_index');
-
-        // dd($wbsrba->get()->pluck('kalimat')->toArray());
 
         $getwbsrba = $wbsrba->get();
 
@@ -65,7 +80,8 @@ class RespondenController extends Controller
 
         $labels = [];
         foreach ($getwbsrba->pluck('kalimat')->toArray() as $s){
-            $labels[] = $this->getEveryNthWord($s, 7);
+            // $labels[] = $this->getEveryNthWord($s, 7);
+            $labels[] = $this->getFirstNWords($s, 12);
         }
 
         $label = $labels;

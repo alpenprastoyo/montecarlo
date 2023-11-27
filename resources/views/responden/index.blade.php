@@ -106,7 +106,7 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <canvas id="myChart" height="6000"></canvas>
+                                    <canvas id="myChart" height="1200"></canvas>
                                     <hr>
                                     Persebaran data <em>Risk Index</em> untuk tiap WBS dan RBA ditampilkan pada grafik di
                                     atas.

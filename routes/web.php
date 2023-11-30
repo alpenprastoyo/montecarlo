@@ -52,8 +52,7 @@ Route::middleware(['auth', 'user-access:responden'])->name('responden.')->prefix
     });  
 
     Route::get('/risk_index', [RespondenController::class, 'riskIndex'])->name('risk.index');
-
-
+    Route::get('/petunjuk', [RespondenController::class, 'petunjuk'])->name('petunjuk');
 });
 
 Route::middleware(['auth', 'user-access:admin'])->name('admin.')->prefix('admin')->group(function () {

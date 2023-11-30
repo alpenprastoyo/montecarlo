@@ -145,4 +145,9 @@ class RespondenController extends Controller
     {
         return view('responden.index');
     } 
+
+    public function petunjuk()
+    {
+        return view('responden.petunjuk');
+    } 
 }

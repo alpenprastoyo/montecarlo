@@ -136,17 +136,68 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="alert alert-success" role="alert">
-                                <h4 class="alert-heading">Keterangan</h4>
-                                <p>1 : Sangat Tidak Setuju</p>
-                                <p>2 : Tidak Setuju</p>
-                                <p>3 : Netral</p>
-                                <p>4 : Setuju</p>
-                                <p>5 : Sangat Setuju</p>
-
-                                <hr>
-                                <p class="mb-0">Silahkan Mengisi.</p>
-                              </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-1 font-weight-bold text-primary">Kolom <em>Impact</em> (Dampak)</h6>
+                                        </div>
+                                        <div class="card-body font-weight-normal">
+                                            <h6 class="m-0 font-weight-normal text-dark lh-sm">Penilaian kolom impact (dampak) berkaitan dengan dampak atau keparahan yang dapat terjadi pada setiap risiko yang ditanyakan sesuai dengan parameter pada tabel berikut:</h6><br>
+                                            <table class="table table-sm table-bordered border-black">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center text-success" style="width: 10%" scope="col">1</th>
+                                                        <th class="text-center text-success" style="width: 10%" scope="col">2</th>
+                                                        <th class="text-center text-dark" style="width: 10%" scope="col">3</th>
+                                                        <th class="text-center text-danger" style="width: 20%" scope="col">4</th>
+                                                        <th class="text-center text-danger" style="width: 20%" scope="col">5</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th class="text-center text-success font-weight-bolder">Berdampak Sangat Kecil</th>
+                                                        <td class="text-center text-success">Berdampak Kecil</td>
+                                                        <td class="text-center text-dark">Berdampak Sedang</td>
+                                                        <td class="text-center text-danger">Berdampak Besar</td>
+                                                        <td class="text-center text-danger font-weight-bolder">Berdampak Parah</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-1 font-weight-bold text-primary">Kolom <em>Probability</em> (Kemungkinan)</h6>
+                                        </div>
+                                        <div class="card-body font-weight-normal">
+                                            <h6 class="m-0 font-weight-normal text-dark">Penilaian kolom probability (kemungkinan) berkaitan dengan kemungkinan yang dapat terjadi pada setiap risiko yang ditanyakan sesuai dengan parameter pada tabel berikut:</h6><br>
+                                            <table class="table table-sm table-bordered border-black">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center text-success" style="width: 20%" scope="col">1</th>
+                                                        <th class="text-center text-success" style="width: 20%" scope="col">2</th>
+                                                        <th class="text-center text-dark" style="width: 20%" scope="col">3</th>
+                                                        <th class="text-center text-danger" style="width: 20%" scope="col">4</th>
+                                                        <th class="text-center text-danger" style="width: 20%" scope="col">5</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th class="text-center text-success font-weight-bolder">Sangat Jarang Terjadi</th>
+                                                        <td class="text-center text-success">Jarang Terjadi</td>
+                                                        <td class="text-center text-dark">Dapat Terjadi</td>
+                                                        <td class="text-center text-danger">Mungkin Terjadi</td>
+                                                        <td class="text-center text-danger font-weight-bolder">Sangat Mungkin Terjadi</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -279,7 +330,73 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">RBA
+                    
+                    <div class="modal-body">
+                        Ketentuan pengisian kuesioner:<br></br>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-1 font-weight-bold text-primary">Kolom <em>Impact</em> (Dampak)</h6>
+                                    </div>
+                                    <div class="card-body font-weight-normal">
+                                        <h6 class="m-0 font-weight-normal text-dark lh-sm">Penilaian kolom impact (dampak) berkaitan dengan dampak atau keparahan yang dapat terjadi pada setiap risiko yang ditanyakan sesuai dengan parameter pada tabel berikut:</h6><br>
+                                        <table class="table table-sm table-bordered border-black">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center text-success" style="width: 10%" scope="col">1</th>
+                                                    <th class="text-center text-success" style="width: 10%" scope="col">2</th>
+                                                    <th class="text-center text-dark" style="width: 10%" scope="col">3</th>
+                                                    <th class="text-center text-danger" style="width: 20%" scope="col">4</th>
+                                                    <th class="text-center text-danger" style="width: 20%" scope="col">5</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="text-center text-success font-weight-bolder">Berdampak Sangat Kecil</th>
+                                                    <td class="text-center text-success">Berdampak Kecil</td>
+                                                    <td class="text-center text-dark">Berdampak Sedang</td>
+                                                    <td class="text-center text-danger">Berdampak Besar</td>
+                                                    <td class="text-center text-danger font-weight-bolder">Berdampak Parah</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-1 font-weight-bold text-primary">Kolom <em>Probability</em> (Kemungkinan)</h6>
+                                    </div>
+                                    <div class="card-body font-weight-normal">
+                                        <h6 class="m-0 font-weight-normal text-dark">Penilaian kolom probability (kemungkinan) berkaitan dengan kemungkinan yang dapat terjadi pada setiap risiko yang ditanyakan sesuai dengan parameter pada tabel berikut:</h6><br>
+                                        <table class="table table-sm table-bordered border-black">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center text-success" style="width: 20%" scope="col">1</th>
+                                                    <th class="text-center text-success" style="width: 20%" scope="col">2</th>
+                                                    <th class="text-center text-dark" style="width: 20%" scope="col">3</th>
+                                                    <th class="text-center text-danger" style="width: 20%" scope="col">4</th>
+                                                    <th class="text-center text-danger" style="width: 20%" scope="col">5</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="text-center text-success font-weight-bolder">Sangat Jarang Terjadi</th>
+                                                    <td class="text-center text-success">Jarang Terjadi</td>
+                                                    <td class="text-center text-dark">Dapat Terjadi</td>
+                                                    <td class="text-center text-danger">Mungkin Terjadi</td>
+                                                    <td class="text-center text-danger font-weight-bolder">Sangat Mungkin Terjadi</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body m-1 font-weight-normal text-dark">Responden wajib menjawab seluruh pertanyaan pada kuesioner yang tersedia.<br></br>Setelah menekan tombol Simpan, jawaban telah tersimpan di database dan tidak dapat diubah kembali.
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>

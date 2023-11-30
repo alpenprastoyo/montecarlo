@@ -54,7 +54,7 @@
 
 <!-- Nav Item - Charts -->
 <li class="nav-item">
-    <a class="nav-link" href="charts.html">
+    <a class="nav-link" href="{{ route('responden.petunjuk')}}">
         <i class="fas fa-fw fa-question"></i>
         <span>Petunjuk</span></a>
 </li>

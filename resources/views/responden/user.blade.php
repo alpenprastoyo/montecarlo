@@ -72,7 +72,7 @@
                                             <div class="col-sm-7">
                                                 <input value="{{ auth()->user()->email }}" type="email"
                                                     class="form-control border-bottom border-success-subtle" id="username"
-                                                    name="email" maxlength="20" autocomplete="off">
+                                                    name="email"  autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -215,7 +215,7 @@
                                             <div class="col-sm-7">
                                                 <input value="" type="password"
                                                     class="form-control border-bottom border-success-subtle"
-                                                    id="password" name="password" maxlength="20" autocomplete="off">
+                                                    id="password" name="password"  autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -226,7 +226,7 @@
                                             <div class="col-sm-7">
                                                 <input value="" type="password"
                                                     class="form-control border-bottom border-success-subtle"
-                                                    id="password_confirmation" name="password_confirmation" maxlength="20"
+                                                    id="password_confirmation" name="password_confirmation" 
                                                     autocomplete="off">
                                             </div>
                                         </div>

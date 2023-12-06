@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RBATransactionModel;
 use App\Models\RBAWBSModel;
 use App\Models\User;
+use App\Models\WBSTransactionModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -86,7 +87,7 @@ class RespondenController extends Controller
 
         $label = $labels;
 
-        $responden = RBATransactionModel::groupBy('id_user');
+        $responden = WBSTransactionModel::groupBy('id_user');
         $data = [
             'highetsWbsRba' => $highestWbsRba,
             'responden' => $responden,

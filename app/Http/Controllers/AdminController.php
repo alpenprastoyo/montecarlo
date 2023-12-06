@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RBATransactionModel;
 use App\Models\RBAWBSModel;
 use App\Models\User;
+use App\Models\WBSTransactionModel;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -12,7 +13,7 @@ class AdminController extends Controller
     public function index()
     {
         $wbsrba = RBAWBSModel::orderByDesc('risk_index')->first();
-        $responden = RBATransactionModel::groupBy('id_user');
+        $responden = WBSTransactionModel::groupBy('id_user');
         $data = [
             'wbsrba' => $wbsrba,
             'responden' => $responden

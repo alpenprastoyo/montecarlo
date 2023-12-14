@@ -97,7 +97,7 @@
                     <div class="row">
 
                         <!-- Grafik Risk Index -->
-                        <div class="col-xl-12 col-lg-5">
+                        <div class="col-xl-12 col-lg-12">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3">
@@ -105,11 +105,10 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-pie pt-4">
-                                        <canvas id="RiskChart"></canvas>
-                                    </div>
+                                    <canvas id="myChart" height="1200"></canvas>
                                     <hr>
-                                    Persebaran data <em>Risk Index</em> untuk tiap WBS dan RBA ditampilkan pada grafik di atas.
+                                    Persebaran data <em>Risk Index</em> untuk tiap WBS dan RBA ditampilkan pada grafik di
+                                    atas.
 
                                 </div>
                             </div>
@@ -133,6 +132,38 @@
 
 @section('script')
     <!-- Page level custom scripts -->
-    <script  src="{{ asset('asset/sb-admin/js/demo/chart-area-demo.js')}}"></script>
-    <script  src="{{ asset('asset/sb-admin/js/demo/chart-pie-demo.js')}}"></script>
+        <!-- Page level custom scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var ctx = document.getElementById('myChart').getContext('2d');
+    
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    options: {
+                        indexAxis: 'y',
+                        responsive: 'true',
+                        maintainAspectRatio: 'true',
+                    },
+                    data: {
+                        labels: {!! $label !!},
+                        datasets: [{
+                            label: 'My Dataset',
+                            data: {!! $data !!},
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                            ],
+                            borderWidth: 1,
+                        }]
+                    }
+                });
+            });
+        </script>
 @endsection

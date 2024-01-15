@@ -64,7 +64,8 @@ class AdminController extends Controller
         return view('admin.responden_list',$data);
     }
 
-    public function respondenGraph(){
+    public function respondenGraph()
+    {
         return view('admin.responden_graph');
     }
 }

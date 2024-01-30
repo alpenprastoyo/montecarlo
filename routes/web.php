@@ -58,6 +58,9 @@ Route::middleware(['auth', 'user-access:responden'])->name('responden.')->prefix
 Route::middleware(['auth', 'user-access:admin'])->name('admin.')->prefix('admin')->group(function () {
   
     Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::get('/wbs', [AdminController::class, 'Wbs'])->name('wbs');
+    Route::get('/rba', [AdminController::class, 'Rba'])->name('rba');
+
     
     Route::name('kuesioner.')->prefix('kuesioner')->group(function () {
         Route::get('/', [QuestionnaireController::class, 'index'])->name('index');
@@ -67,10 +70,11 @@ Route::middleware(['auth', 'user-access:admin'])->name('admin.')->prefix('admin'
 
     Route::name('responden.')->prefix('responden')->group(function () {
         Route::get('/', [AdminController::class, 'respondenList'])->name('index');
-        Route::post('/graph', [AdminController::class, 'respondenGraph'])->name('graph');
+        Route::get('/graph', [AdminController::class, 'respondenGraph'])->name('graph');
     });
 
-    Route::get('/risk_index', [RespondenController::class, 'riskIndex'])->name('risk.index');
+    Route::get('/risk_index', [AdminController::class, 'riskIndex'])->name('risk.index');
+
 
 
 });

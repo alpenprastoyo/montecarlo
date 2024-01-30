@@ -33,7 +33,7 @@
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Responde</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Risk Index</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -46,25 +46,17 @@
                                                 <thead>
                                                     <tr>
                                                         <th rowspan="1" colspan="1">No</th>
-                                                        <th rowspan="1" colspan="1">Nama</th>
-                                                        <th rowspan="1" colspan="1">Jenis Kelamin</th>
-                                                        <th rowspan="1" colspan="1">Usia</th>
-                                                        <th rowspan="1" colspan="1">Jenis Perusahaan</th>
-                                                        <th rowspan="1" colspan="1">Pengalaman Kerja</th>
-                                                        <th rowspan="1" colspan="1">Pendidikan Terakhir</th>
+                                                        <th rowspan="1" colspan="1">Pekerjaan</th>
+                                                        <th rowspan="1" colspan="1">Risk Index</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @php $i = 1 @endphp
-                                                    @foreach ($responden as $w)
+                                                    @foreach ($wbarbs as $w)
                                                         <tr class="odd">
                                                             <td class="sorting_1">{{ $i++ }}</td>
-                                                            <td>{{ $w->name }}</td>
-                                                            <td>{{ $w->jenis_kelamin }}</td>
-                                                            <td>{{ $w->usia }} Tahun</td>
-                                                            <td>{{ $w->jenis_perusahaan }}</td>
-                                                            <td>{{ $w->pengalaman_kerja }} Tahun</td>
-                                                            <td>{{ $w->pendidikan_terakhir }}</td>
+                                                            <td>{{ $w->kalimat }}</td>
+                                                            <td>{{ $w->risk_index }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

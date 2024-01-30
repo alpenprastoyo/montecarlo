@@ -35,6 +35,8 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Tabel Data Responden </h6>
+                            <a href="{{ route('admin.responden.add') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-square-plus fa-sm text-white-50 mr-2"></i>Tambah Responden</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

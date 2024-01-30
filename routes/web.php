@@ -75,6 +75,9 @@ Route::middleware(['auth', 'user-access:admin'])->name('admin.')->prefix('admin'
 
     Route::get('/risk_index', [AdminController::class, 'riskIndex'])->name('risk.index');
 
+    Route::get('/petunjuk', [AdminController::class, 'petunjuk'])->name('petunjuk');
+
+
 
 
 });

@@ -16,8 +16,27 @@
 
 
                 <!-- Begin Page Content -->
+
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Grafik Responden</h1>
+                    </div>
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a>Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Grafik Responden</li>
+                        </ol>
+                    </nav>
+
+                </div>
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
+                    
 
                     <!-- Page Heading -->
                     <p class="mb-4">Persebaran data dari seluruh responden yang berkaitan dengan latar belakang identitas

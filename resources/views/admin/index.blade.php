@@ -65,7 +65,7 @@
                                             <i class="fas fa-triangle-exclamation fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
-                                    <a href="{{route('montecarlo.index')}}"><button type="button" class="btn btn-primary">Lakukan Monte Carlo</button></a>
+                                    {{-- <a href="{{route('montecarlo.index')}}"><button type="button" class="btn btn-primary">Lakukan Monte Carlo</button></a> --}}
                                 </div>
                             </div>
                         </div>

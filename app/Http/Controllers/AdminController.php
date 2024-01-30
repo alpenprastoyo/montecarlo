@@ -39,7 +39,6 @@ class AdminController extends Controller
         $responden = WBSTransactionModel::groupBy('id_user');
         $getwbsrba = RBAWBSModel::orderByDesc('risk_index')->get();
 
-
         $labels = [];
         foreach ($getwbsrba->pluck('kalimat')->toArray() as $s) {
             // $labels[] = $this->getEveryNthWord($s, 7);
@@ -75,9 +74,10 @@ class AdminController extends Controller
         $usia2 = User::whereBetween('usia', [20,31])->where('role','responden')->get()->count();
         $usia3 = User::whereBetween('usia', [30,41])->where('role','responden')->get()->count();
         $usia4 = User::whereBetween('usia', [40,51])->where('role','responden')->get()->count();
-        $usia5 = User::whereBetween('usia', [60,120])->where('role','responden')->get()->count();
+        $usia5 = User::whereBetween('usia', [50,61])->where('role','responden')->get()->count();
+        $usia6 = User::whereBetween('usia', [61,120])->where('role','responden')->get()->count();
 
-        $dataUsia = [$usia1, $usia2, $usia3, $usia4, $usia5];
+        $dataUsia = [$usia1, $usia2, $usia3, $usia4, $usia5, $usia6];
 
 
         $pria = User::where('role','responden')->where('jenis_kelamin','Pria')->get()->count();
@@ -91,12 +91,12 @@ class AdminController extends Controller
         $dataPerusahaan = [$konsultan, $kontraktor, $pemerintahan];
 
         //  Query Diagram Pengalaman Kerja
-        $pengalaman1 = User::whereBetween('usia', [0,6])->where('role','responden')->get()->count();
-        $pengalaman2 = User::whereBetween('usia', [5,11])->where('role','responden')->get()->count();
-        $pengalaman3 = User::whereBetween('usia', [10,16])->where('role','responden')->get()->count();
-        $pengalaman4 = User::whereBetween('usia', [15,21])->where('role','responden')->get()->count();
-        $pengalaman5 = User::whereBetween('usia', [20,26])->where('role','responden')->get()->count();
-        $pengalaman6 = User::whereBetween('usia', [25,100])->where('role','responden')->get()->count();
+        $pengalaman1 = User::whereBetween('pengalaman_kerja', [0,6])->where('role','responden')->get()->count();
+        $pengalaman2 = User::whereBetween('pengalaman_kerja', [5,11])->where('role','responden')->get()->count();
+        $pengalaman3 = User::whereBetween('pengalaman_kerja', [10,16])->where('role','responden')->get()->count();
+        $pengalaman4 = User::whereBetween('pengalaman_kerja', [15,21])->where('role','responden')->get()->count();
+        $pengalaman5 = User::whereBetween('pengalaman_kerja', [20,26])->where('role','responden')->get()->count();
+        $pengalaman6 = User::whereBetween('pengalaman_kerja', [26,100])->where('role','responden')->get()->count();
 
 
         $dataPengalaman = [$pengalaman1, $pengalaman2, $pengalaman3, $pengalaman4, $pengalaman5, $pengalaman6];
@@ -195,4 +195,9 @@ class AdminController extends Controller
         return view('admin.risk_index',$data);
 
     }
+
+    public function petunjuk()
+    {
+        return view('admin.petunjuk');
+    } 
 }

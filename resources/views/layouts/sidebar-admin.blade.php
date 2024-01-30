@@ -6,7 +6,6 @@
         <div class="sidebar-brand-icon">
             <img src="{{ asset('asset/image/logo_2.png') }}" alt="Logo" width="48" height="48"
                 class="d-inline-block align-text-middle">
-            Sisfo
         </div>
     </a>
 
@@ -77,7 +76,7 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{ route('admin.petunjuk') }}">
             <i class="fas fa-fw fa-question"></i>
             <span>Petunjuk</span></a>
     </li>

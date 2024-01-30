@@ -75,5 +75,15 @@
             @endsection
 
 @section('script')
- 
+<script src="{{ asset('asset/sb-admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('asset/sb-admin/vendor/datatables/dataTables.bootstrap4.js') }}"></script>
+
+
+<script>
+    // Call the dataTables jQuery plugin
+
+    $(document).ready(function() {
+        $('#dataTable').DataTable();
+    });
+</script>
 @endsection

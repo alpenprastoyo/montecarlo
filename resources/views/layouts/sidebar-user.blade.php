@@ -6,7 +6,6 @@
     <div class="sidebar-brand-icon">
     <img src="{{ asset('asset/image/logo_2.png') }}" alt="Logo" width="48" height="48"
     class="d-inline-block align-text-middle">
-     Sisfo
     </div>
 </a>
 

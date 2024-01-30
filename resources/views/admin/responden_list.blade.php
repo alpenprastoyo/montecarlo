@@ -27,13 +27,14 @@
 
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                            <li class="breadcrumb-item" aria-current="page">Dashboard </li>
+                            <li class="breadcrumb-item active" aria-current="page">Tabel Data Responden</li>
                         </ol>
                     </nav>
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Responde</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Tabel Data Responden </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

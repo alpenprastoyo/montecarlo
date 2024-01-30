@@ -88,6 +88,7 @@ class RespondenController extends Controller
         $label = $labels;
 
         $responden = WBSTransactionModel::groupBy('id_user');
+        
         $data = [
             'highetsWbsRba' => $highestWbsRba,
             'responden' => $responden,

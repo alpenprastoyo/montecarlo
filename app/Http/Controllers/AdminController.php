@@ -9,7 +9,9 @@ use App\Models\User;
 use App\Models\WBSModel;
 use App\Models\WBSTransactionModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -160,6 +162,49 @@ class AdminController extends Controller
 
 
         return view('admin.responden_graph',$data);
+    }
+
+    public function addResponden(){
+        return view('admin.responden_add');
+    }
+
+    public function inputResponden(Request $request){
+        $data = $request->post();
+
+
+        $data['password'] = Hash::make($data['password']);
+        $data['role'] = 'responden';
+
+        User::create($data);
+
+        return redirect()->route('admin.responden.index')->with('sukses', 'Data Data responden berhasil di tambah');
+    }
+
+    public function editResponden($id){
+        $data = [
+            'responden' => User::find($id)
+        ];
+
+
+        return view('admin.responden_edit',$data);
+    }
+
+    public function updateResponden(Request $request){
+        $data = $request->post();
+
+        $data['password'] = Hash::make($data['password']);
+
+        User::find($data['id'])->update($data);
+
+        return redirect()->route('admin.responden.index')->with('sukses', 'Data Data responden berhasil di update');
+    }
+
+    public function deleteResponden($id){
+        
+        User::find($id)->delete();
+
+        return redirect()->route('admin.responden.index')->with('sukses', 'Data Data responden berhasil di hapus');
+
     }
 
     public function Wbs()

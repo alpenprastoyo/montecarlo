@@ -53,6 +53,7 @@
                                                         <th rowspan="1" colspan="1">Jenis Perusahaan</th>
                                                         <th rowspan="1" colspan="1">Pengalaman Kerja</th>
                                                         <th rowspan="1" colspan="1">Pendidikan Terakhir</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -66,6 +67,10 @@
                                                             <td>{{ $w->jenis_perusahaan }}</td>
                                                             <td>{{ $w->pengalaman_kerja }} Tahun</td>
                                                             <td>{{ $w->pendidikan_terakhir }}</td>
+                                                            <td><align-items-center>
+                                                                <a href="{{ route('admin.responden.edit',['id' => $w->id ]) }}" class="btn btn-sm btn-warning" title="Ubah Data Responden"><i class="fa-solid fa-pen"></i></a>
+                                                                <a href="{{ route('admin.responden.delete',['id' => $w->id ]) }}" class="btn btn-sm btn-danger" title="Hapus Data Responden" onclick="return confirm('Anda yakin untuk menghapus data ini?')" ><i class="fa-solid fa-trash"></i></a>
+                                                            </align-items-center></td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

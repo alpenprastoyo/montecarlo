@@ -71,6 +71,12 @@ Route::middleware(['auth', 'user-access:admin'])->name('admin.')->prefix('admin'
     Route::name('responden.')->prefix('responden')->group(function () {
         Route::get('/', [AdminController::class, 'respondenList'])->name('index');
         Route::get('/graph', [AdminController::class, 'respondenGraph'])->name('graph');
+        Route::get('/add', [AdminController::class, 'addResponden'])->name('add');
+        Route::post('/input', [AdminController::class, 'inputResponden'])->name('input');
+        Route::get('/edit/{id}', [AdminController::class, 'editResponden'])->name('edit');
+        Route::post('/update', [AdminController::class, 'updateResponden'])->name('update');
+        Route::get('/delete/{id}', [AdminController::class, 'deleteResponden'])->name('delete');
+
     });
 
     Route::get('/risk_index', [AdminController::class, 'riskIndex'])->name('risk.index');

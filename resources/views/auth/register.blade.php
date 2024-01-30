@@ -40,9 +40,9 @@
                             <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
-                                    <img src="../asset/image/logo.png" class="rounded mx-auto d-block" alt="...">
+                                    <img width="100" height="100" src="../asset/image/logo.png" class="rounded mx-auto d-block" alt="...">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 fs-3 mb-4">Selamat Datang!</h1>
+                                        <h1 class="h4 text-gray-900 fs-3 mb-4">Register</h1>
                                     </div>
                                     <form class="user" action="{{ route('register') }}" method="POST">
                                         @csrf
@@ -211,12 +211,21 @@
                                                     </span>
                                                     <span class="text fs-6">Daftar</span>
                                                 </button>
+
+                                              
+
                                                 <div class="col-4">
                                                     <img src="" alt="">
                                                 </div>
+                                                
                                             </div>
+                                           
                                         </div>
                                     </form>
+
+                                    <div style="padding-top:50px" class="text-center">
+                                        <a  href="{{ route('login') }}">Sudah Punya Akun? Login!</a>
+                                    </div>
                                 </div>
                                 <footer class="sticky-footer bg-white">
                                     <div class="container my-auto">

@@ -38,9 +38,9 @@
                             <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
-                                    <img src="../asset/image/logo.png" class="rounded mx-auto d-block" alt="...">
+                                    <img width="100" height="100" src="../asset/image/logo.png" class="rounded mx-auto d-block" alt="...">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 fs-3 mb-4">Selamat Datang!</h1>
+                                        <h1 class="h4 text-gray-900 fs-3 mb-4">Login!</h1>
                                     </div>
                                     <form class="user" action="{{ route('login') }}" method="POST">
                                         @csrf
